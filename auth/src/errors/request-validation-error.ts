@@ -17,5 +17,6 @@ export class RequestValidationError extends CustomError {
   }
   serializeErrors() {
     const formattedErrors = this.errors.map(formatValidationError);
+    return formattedErrors;
   }
 }
