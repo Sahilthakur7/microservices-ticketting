@@ -1,4 +1,5 @@
 import { ValidationError } from "express-validator";
+import { CustomError } from "./custom-error";
 
 const formatValidationError = (error: ValidationError) => {
   return {
@@ -6,10 +7,10 @@ const formatValidationError = (error: ValidationError) => {
     field: error.param,
   };
 };
-export class RequestValidationError extends Error {
+export class RequestValidationError extends CustomError {
   statusCode = 400;
   constructor(public errors: ValidationError[]) {
-    super();
+    super("Invalid request parameters");
 
     //only because we are extending built in object
     Object.setPrototypeOf(this, RequestValidationError.prototype);
